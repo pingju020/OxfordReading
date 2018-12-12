@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>image</key>
+		<string>at_school@2x.png</string>
+		<key>lrc</key>
+		<string>at school.lrc</string>
+		<key>mp3</key>
+		<string>at_school.mp3</string>
+		<key>name</key>
+		<string>At School</string>
+		<key>singer</key>
+		<string>Unknown</string>
+		<key>album</key>
+		<string>OxfordReading</string>
+		<key>type</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>mp3</key>
+		<string>The Library.mp3</string>
+		<key>lrc</key>
+		<string>the library.lrc</string>
+		<key>name</key>
+		<string>The Library</string>
+		<key>singer</key>
+		<string>Unknown</string>
+		<key>album</key>
+		<string>OxfordReading</string>
+		<key>image</key>
+		<string>the_library@2x.png</string>
+		<key>type</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>The_lost_tedy@2x.png</string>
+		<key>lrc</key>
+		<string>the lost teddy.lrc</string>
+		<key>mp3</key>
+		<string>The Lost Teddy.mp3</string>
+		<key>name</key>
+		<string>The Lost Teddy</string>
+		<key>singer</key>
+		<string>Unknown</string>
+		<key>album</key>
+		<string>OxfordReading</string>
+		<key>type</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>the_haircut@2x.png</string>
+		<key>lrc</key>
+		<string>the haircut.lrc</string>
+		<key>mp3</key>
+		<string>The Haircut.mp3</string>
+		<key>name</key>
+		<string>The Haircut</string>
+		<key>singer</key>
+		<string>Unknown</string>
+		<key>album</key>
+		<string>OxfordReading</string>
+		<key>type</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>the_pancake@2x.png</string>
+		<key>lrc</key>
+		<string>the pancake.lrc</string>
+		<key>mp3</key>
+		<string>the_pancake.mp3</string>
+		<key>name</key>
+		<string>The Pancake</string>
+		<key>singer</key>
+		<string>Unknown</string>
+		<key>album</key>
+		<string>OxfordReading</string>
+		<key>type</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>The_swing_ball@2x.png</string>
+		<key>lrc</key>
+		<string>the swing ball.lrc</string>
+		<key>mp3</key>
+		<string>the_swing_ball.mp3</string>
+		<key>name</key>
+		<string>The Swing Ball</string>
+		<key>singer</key>
+		<string>Unknown</string>
+		<key>album</key>
+		<string>OxfordReading</string>
+		<key>type</key>
+		<integer>2</integer>
+	</dict>
+</array>
+</plist>

@@ -1,0 +1,59 @@
+//
+//  OxfordReading.pch
+//  OxfordReading
+//
+//  Created by yangjuanping on 2018/6/28.
+//  Copyright © 2018年 yangjuanping. All rights reserved.
+//
+
+#ifndef OxfordReading_pch
+#define OxfordReading_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import "Logging.h"
+#import "Constant.h"
+#import "NSString+Utils.h"
+#import "UIView+Utils.h"
+#import "UIViewController+Utils.h"
+#import "UIColor+Utils.h"
+
+#define IS_IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
+
+#define LocalizedString(key)    NSLocalizedString(key,nil)
+
+#define PRO_ASSIGN              @property (nonatomic,assign)
+#define PRO_STRONG              @property (nonatomic,strong)
+#define PRO_WEAK                @property (nonatomic,weak)
+
+#pragma mark -@NSString
+#define StringFormat(format, ...)   [NSString stringWithFormat:format, ##__VA_ARGS__]
+
+#pragma mark __weak && __strong
+
+#define WEAK_SELF(obj) __weak typeof(self) (obj) = self;
+#define STRONG_SELF(obj) __strong typeof(self) (obj) = self;
+
+/*设置视图四个角的弧度，obj:UIView  radius: 弧度float*/
+#define CORNER_RADIUS(obj,radius)       \
+obj.layer.cornerRadius = radius;  \
+obj.layer.masksToBounds = YES;
+/*设置正方形显示成圆形*/
+#define CORNER_CIRCLE(obj)                \
+{CGFloat radius = obj.bounds.size.height/2.0;\
+CORNER_RADIUS(obj,radius);}
+
+/*设置按钮图标和文字上下排布*/
+
+
+#define STATIC_STRING(var,value)    static NSString *const var = value;
+
+STATIC_STRING(kStrIsLogin, @"isLogin")
+STATIC_STRING(kStrUserinfo, @"userinfo")
+STATIC_STRING(kStrLoginType, @"loginType")
+STATIC_STRING(kStrUserToken, @"token")
+STATIC_STRING(kStrNotificationReLogin, @"relogin")
+
+
+#endif /* OxfordReading_pch */
