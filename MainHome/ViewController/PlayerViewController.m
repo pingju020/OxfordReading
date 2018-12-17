@@ -10,13 +10,13 @@
 #import "Masonry.h"
 #import "CYMusicModel.h"
 #import "YYModel.h"
-#import "CYMusicManager.h"
 #import "CYLyricParser.h"
 #import "CYLyricModel.h"
 #import "UIColorLabel.h"
 #import "UILyricView.h"
 #import <MediaPlayer/MediaPlayer.h>
-#import "AudioBookPlayerManager.h"
+//#import "AudioBookPlayerManager.h"
+#import "AudioPlayerManager.h"
 
 @interface PlayerViewController ()<UILyricViewDelegate>
 //当前曲目索引
@@ -75,6 +75,7 @@
     //设置界面
     [self setupUI];
     
+    self.playButton.selected = YES;
     //加载数据
     //[self loadMusicData];
     //根据数据 刷新UI
@@ -127,48 +128,54 @@
     //专辑
     self.albumLabel.text = self.modelArray[self.currentIndex].album;
     
-    //默认点击播放按钮
-    [self playAction:self.playButton];
     
-    NSString *pathStr = [[NSBundle mainBundle] pathForResource:self.modelArray[self.currentIndex].mp3  ofType:nil];
-//    [[AudioBookPlayerManager sharedManager]p_musicPlayerWithURL:<#(NSURL *)#>:[NSURL URLWithString:pathStr]];
-    //当前曲目索引
-    [[CYMusicManager sharedManager] playMusicWithFileName: self.modelArray[self.currentIndex].mp3];
-    [CYMusicManager sharedManager].playBtn = self.playButton;
-    //当前曲目时长
-    self.totalTimeLabel.text = [self timeStrWithTimeInterval:[CYMusicManager sharedManager].duration];
-    //设置锁屏视图
-    [self setUpLockView];
+//    NSString *pathStr = [[NSBundle mainBundle] pathForResource:self.modelArray[self.currentIndex].mp3  ofType:nil];
+    [[AudioPlayerManager sharedManager]changePlayItem:self.modelArray[self.currentIndex].mp3];
+    [AudioPlayerManager sharedManager].PlayProgress = ^(CGFloat currentTime, CGFloat totalTime) {
+        self.totalTimeLabel.text = [self timeStrWithTimeInterval:totalTime];
+        self.currentTimeLabel.text = [self timeStrWithTimeInterval:currentTime];
+        self.singerImgView.transform = CGAffineTransformRotate(self.singerImgView.transform, M_PI_4/240);
+        
+        //进度条
+        self.progressSlider.value = currentTime / totalTime;
+        
+        //更新歌词
+        [self updateLyric];
+    };
+    
+    [AudioPlayerManager sharedManager].playFinished = ^{
+        self.playButton.selected = NO;
+    };
 }
 
-- (void)setUpLockView {
-    //设置正在播放中心
-    MPNowPlayingInfoCenter *center = [MPNowPlayingInfoCenter defaultCenter];
-    //当前播放曲目
-    CYMusicModel *music = self.modelArray[self.currentIndex];
-    //封面图片
-    MPMediaItemArtwork *artWork = [[MPMediaItemArtwork alloc] initWithImage:[self drawImageWithArtWorkAndLyric]];
-    NSDictionary *dict = @{MPNowPlayingInfoPropertyElapsedPlaybackTime:@([CYMusicManager sharedManager].currentTime),  //当前播放时长
-                           MPMediaItemPropertyPlaybackDuration:@([CYMusicManager sharedManager].duration),   //当前播放曲目总时长
-                           MPMediaItemPropertyTitle:music.name,  //曲目名
-                           MPMediaItemPropertyAlbumTitle:music.album,  //专辑名
-                           MPMediaItemPropertyArtwork:artWork};  //封面图片
-    center.nowPlayingInfo = dict;
-    
-    // MPMediaItemPropertyAlbumTitle :专辑名
-    // MPMediaItemPropertyAlbumTrackCount:专辑中曲目数
-    // MPMediaItemPropertyAlbumTrackNumber:当前曲目索引
-    // MPMediaItemPropertyArtist:歌手
-    // MPMediaItemPropertyArtwork:封面图片
-    // MPMediaItemPropertyComposer:作曲人
-    // MPMediaItemPropertyDiscCount:专辑数
-    // MPMediaItemPropertyDiscNumber:专辑编号
-    // MPMediaItemPropertyGenre:类型,流派
-    // MPMediaItemPropertyPersistentID:唯一标识符
-    // MPMediaItemPropertyPlaybackDuration:曲目时长
-    // MPMediaItemPropertyTitle:歌曲名称
-    //MPNowPlayingInfoPropertyElapsedPlaybackTime:当前播放时长
-}
+//- (void)setUpLockView {
+//    //设置正在播放中心
+//    MPNowPlayingInfoCenter *center = [MPNowPlayingInfoCenter defaultCenter];
+//    //当前播放曲目
+//    CYMusicModel *music = self.modelArray[self.currentIndex];
+//    //封面图片
+//    MPMediaItemArtwork *artWork = [[MPMediaItemArtwork alloc] initWithImage:[self drawImageWithArtWorkAndLyric]];
+//    NSDictionary *dict = @{MPNowPlayingInfoPropertyElapsedPlaybackTime:@([CYMusicManager sharedManager].currentTime),  //当前播放时长
+//                           MPMediaItemPropertyPlaybackDuration:@([CYMusicManager sharedManager].duration),   //当前播放曲目总时长
+//                           MPMediaItemPropertyTitle:music.name,  //曲目名
+//                           MPMediaItemPropertyAlbumTitle:music.album,  //专辑名
+//                           MPMediaItemPropertyArtwork:artWork};  //封面图片
+//    center.nowPlayingInfo = dict;
+//
+//    // MPMediaItemPropertyAlbumTitle :专辑名
+//    // MPMediaItemPropertyAlbumTrackCount:专辑中曲目数
+//    // MPMediaItemPropertyAlbumTrackNumber:当前曲目索引
+//    // MPMediaItemPropertyArtist:歌手
+//    // MPMediaItemPropertyArtwork:封面图片
+//    // MPMediaItemPropertyComposer:作曲人
+//    // MPMediaItemPropertyDiscCount:专辑数
+//    // MPMediaItemPropertyDiscNumber:专辑编号
+//    // MPMediaItemPropertyGenre:类型,流派
+//    // MPMediaItemPropertyPersistentID:唯一标识符
+//    // MPMediaItemPropertyPlaybackDuration:曲目时长
+//    // MPMediaItemPropertyTitle:歌曲名称
+//    //MPNowPlayingInfoPropertyElapsedPlaybackTime:当前播放时长
+//}
 
 #pragma mark - 绘制封面和歌词
 - (UIImage *)drawImageWithArtWorkAndLyric {
@@ -231,59 +238,98 @@
 
 #pragma mark 定时器监听事件
 -(void)updateTimeAction {
-    //当前播放时长
-    self.currentTimeLabel.text = [self timeStrWithTimeInterval:[CYMusicManager sharedManager].currentTime];
-    
-    //歌手图片旋转
-    self.singerImgView.transform = CGAffineTransformRotate(self.singerImgView.transform, M_PI_4/240);
-    
-    //进度条
-    self.progressSlider.value = [CYMusicManager sharedManager].currentTime / [CYMusicManager sharedManager].duration;
-    
-    if ([self.currentTimeLabel.text isEqualToString:self.totalTimeLabel.text]) {
-        [self nextAction:self.nextButton];
-    }
-    
-    //更新歌词
-    [self updateLyric];
+//    //当前播放时长
+//    self.currentTimeLabel.text = [self timeStrWithTimeInterval:[CYMusicManager sharedManager].currentTime];
+//
+//    //歌手图片旋转
+//    self.singerImgView.transform = CGAffineTransformRotate(self.singerImgView.transform, M_PI_4/240);
+//
+//    //进度条
+//    self.progressSlider.value = [CYMusicManager sharedManager].currentTime / [CYMusicManager sharedManager].duration;
+//
+//    if ([self.currentTimeLabel.text isEqualToString:self.totalTimeLabel.text]) {
+//        [self nextAction:self.nextButton];
+//    }
+//
+//    //更新歌词
+//    [self updateLyric];
 }
+
+//- (void)updateLyric {
+//
+//    if (self.lyricModelArr.count>0) {
+//        //当前歌词模型
+//        CYLyricModel *currentLyricModel = self.lyricModelArr[self.currentLyricIndex];
+//        //下一句歌词模型
+//        CYLyricModel *nextLyricModel;
+//        if (self.currentLyricIndex == self.lyricModelArr.count - 1) { //当前歌词即是本曲的最后一句歌词
+//            nextLyricModel = [[CYLyricModel alloc] init];
+//            nextLyricModel.initialTime = [CYMusicManager sharedManager].duration;
+//            nextLyricModel.lyricContent = currentLyricModel.lyricContent;
+//        } else {
+//            nextLyricModel = self.lyricModelArr[self.currentLyricIndex + 1];
+//        }
+//        //往前调整播放进度时
+//        if ([CYMusicManager sharedManager].currentTime > nextLyricModel.initialTime && self.currentLyricIndex < self.lyricModelArr.count - 1) {
+//            self.currentLyricIndex++;
+//            [self updateLyric];
+//            return;
+//        }
+//        //往后调整播放进度时
+//        if ([CYMusicManager sharedManager].currentTime < currentLyricModel.initialTime && self.currentLyricIndex > 0) {
+//            self.currentLyricIndex--;
+//            [self updateLyric];
+//            return;
+//        }
+//        self.lyricsLabel.text = self.lyricModelArr[self.currentLyricIndex].lyricContent;
+//        //    self.lyricsHorLabel.text = self.lyricModelArr[self.currentLyricIndex].lyricContent;
+//        //设置歌词变色进度( (当前播放时间 - 当前句起始时间)/(下一句起始时间 - 当前句起始时间))
+//        CGFloat progress = ([CYMusicManager sharedManager].currentTime - currentLyricModel.initialTime) / (nextLyricModel.initialTime - currentLyricModel.initialTime);
+//        self.lyricsLabel.progress = progress;
+//        //    self.lyricsHorLabel.progress = progress;
+//        //传递当前播放歌曲索引
+//        self.lyricView.currentIndex = _currentLyricIndex;
+//        //设置歌词视图的播放进度
+//        self.lyricView.lyricProgress = progress;
+//    }
+//}
 
 - (void)updateLyric {
     
     if (self.lyricModelArr.count>0) {
-        //当前歌词模型
-        CYLyricModel *currentLyricModel = self.lyricModelArr[self.currentLyricIndex];
-        //下一句歌词模型
-        CYLyricModel *nextLyricModel;
-        if (self.currentLyricIndex == self.lyricModelArr.count - 1) { //当前歌词即是本曲的最后一句歌词
-            nextLyricModel = [[CYLyricModel alloc] init];
-            nextLyricModel.initialTime = [CYMusicManager sharedManager].duration;
-            nextLyricModel.lyricContent = currentLyricModel.lyricContent;
-        } else {
-            nextLyricModel = self.lyricModelArr[self.currentLyricIndex + 1];
-        }
-        //往前调整播放进度时
-        if ([CYMusicManager sharedManager].currentTime > nextLyricModel.initialTime && self.currentLyricIndex < self.lyricModelArr.count - 1) {
-            self.currentLyricIndex++;
-            [self updateLyric];
-            return;
-        }
-        //往后调整播放进度时
-        if ([CYMusicManager sharedManager].currentTime < currentLyricModel.initialTime && self.currentLyricIndex > 0) {
-            self.currentLyricIndex--;
-            [self updateLyric];
-            return;
-        }
-        self.lyricsLabel.text = self.lyricModelArr[self.currentLyricIndex].lyricContent;
-        //    self.lyricsHorLabel.text = self.lyricModelArr[self.currentLyricIndex].lyricContent;
-        //设置歌词变色进度( (当前播放时间 - 当前句起始时间)/(下一句起始时间 - 当前句起始时间))
-        CGFloat progress = ([CYMusicManager sharedManager].currentTime - currentLyricModel.initialTime) / (nextLyricModel.initialTime - currentLyricModel.initialTime);
-        self.lyricsLabel.progress = progress;
-        //    self.lyricsHorLabel.progress = progress;
-        //传递当前播放歌曲索引
-        self.lyricView.currentIndex = _currentLyricIndex;
-        //设置歌词视图的播放进度
-        self.lyricView.lyricProgress = progress;
+//        //当前歌词模型
+//        CYLyricModel *currentLyricModel = self.lyricModelArr[self.currentLyricIndex];
+//        //下一句歌词模型
+//        CYLyricModel *nextLyricModel;
+//        if (self.currentLyricIndex == self.lyricModelArr.count - 1) { //当前歌词即是本曲的最后一句歌词
+//            nextLyricModel = [[CYLyricModel alloc] init];
+//            nextLyricModel.initialTime = [CYMusicManager sharedManager].duration;
+//            nextLyricModel.lyricContent = currentLyricModel.lyricContent;
+//        } else {
+//            nextLyricModel = self.lyricModelArr[self.currentLyricIndex + 1];
+//        }
+//        //往前调整播放进度时
+//        if ([CYMusicManager sharedManager].currentTime > nextLyricModel.initialTime && self.currentLyricIndex < self.lyricModelArr.count - 1) {
+//            self.currentLyricIndex++;
+//            [self updateLyric];
+//            return;
+//        }
+//        //往后调整播放进度时
+//        if ([CYMusicManager sharedManager].currentTime < currentLyricModel.initialTime && self.currentLyricIndex > 0) {
+//            self.currentLyricIndex--;
+//            [self updateLyric];
+//            return;
+//        }
+//        self.lyricsLabel.text = self.lyricModelArr[self.currentLyricIndex].lyricContent;
+//        //    self.lyricsHorLabel.text = self.lyricModelArr[self.currentLyricIndex].lyricContent;
+//        //设置歌词变色进度( (当前播放时间 - 当前句起始时间)/(下一句起始时间 - 当前句起始时间))
+//        CGFloat progress = ([CYMusicManager sharedManager].currentTime - currentLyricModel.initialTime) / (nextLyricModel.initialTime - currentLyricModel.initialTime);
+//        self.lyricsLabel.progress = progress;
+//        //    self.lyricsHorLabel.progress = progress;
+//        //传递当前播放歌曲索引
+//        self.lyricView.currentIndex = _currentLyricIndex;
+//        //设置歌词视图的播放进度
+//        self.lyricView.lyricProgress = progress;
     }
 }
 
@@ -292,7 +338,8 @@
     
     //NSLog(@"%f",sender.value/[CYMusicManager sharedManager].duration);
     
-    [CYMusicManager sharedManager].currentTime = sender.value * [CYMusicManager sharedManager].duration;
+    [[AudioPlayerManager sharedManager] changePlayTime:(sender.value*[AudioPlayerManager sharedManager].duration)];
+//    [CYMusicManager sharedManager].currentTime = sender.value * [CYMusicManager sharedManager].duration;
 }
 
 
@@ -318,18 +365,27 @@
 //播放按钮的监听事件
 - (IBAction)playAction:(UIButton *)sender {
     
-    if (sender.selected) { //暂停
-        [[CYMusicManager sharedManager] pause];
+//    if (sender.selected) { //暂停
+//        [[CYMusicManager sharedManager] pause];
+//        sender.selected = NO;
+//        [self.linkTimer invalidate];
+//    } else { //播放
+//        sender.selected = YES;
+//        [[CYMusicManager sharedManager] playMusicWithFileName: self.modelArray[self.currentIndex].mp3];
+//
+//        //定时器
+//        self.linkTimer = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateTimeAction)];
+//        [self.linkTimer addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+//
+//    }
+    
+    if(sender.selected){
+        [[AudioPlayerManager sharedManager] pause];
         sender.selected = NO;
-        [self.linkTimer invalidate];
-    } else { //播放
+    }
+    else{
         sender.selected = YES;
-        [[CYMusicManager sharedManager] playMusicWithFileName: self.modelArray[self.currentIndex].mp3];
-        
-        //定时器
-        self.linkTimer = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateTimeAction)];
-        [self.linkTimer addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
-        
+        [[AudioPlayerManager sharedManager] play];
     }
 }
 

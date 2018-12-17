@@ -12,11 +12,17 @@
 #import "CYMusicModel.h"
 #import "YYModel.h"
 #import "PlayerViewController.h"
+#import "AudioPlayerManager.h"
+#import "UIColorLabel.h"
 
 @interface MainHomeViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
 @property (strong, nonatomic) NSArray* bookList;
+@property (weak, nonatomic) IBOutlet UIImageView *audioBackImg;
+@property (weak, nonatomic) IBOutlet UILabel *audioTitle;
+@property (weak, nonatomic) IBOutlet UIColorLabel *lrcLabel;
+@property (weak, nonatomic) IBOutlet UIButton *playBtn;
 @end
 
 @implementation MainHomeViewController
@@ -32,6 +38,17 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [AudioPlayerManager sharedManager].PlayProgress = ^(CGFloat currentTime, CGFloat totalTime) {
+        ;
+    };
+    
+    [AudioPlayerManager sharedManager].playFinished = ^{
+        self.playBtn.selected = NO;
+    };
+}
 -(void)getPlayList{
     
     NSString *pathStr = [[NSBundle mainBundle] pathForResource:@"mlist.plist" ofType:nil];
@@ -129,6 +146,8 @@
     PlayerViewController* vc = [PlayerViewController allocController];
     vc.hidesBottomBarWhenPushed = YES;
     CYMusicModel* model = [_bookList objectAtIndex:indexPath.row];
+    
+    self.audioTitle.text = model.name;
     vc.modelArray = [NSArray arrayWithObjects:model, nil];
     [self.navigationController pushViewController:vc animated:YES];
 }
