@@ -98,5 +98,277 @@
 		<key>type</key>
 		<integer>2</integer>
 	</dict>
+	<dict>
+		<key>image</key>
+		<string>big_feet@2x.png</string>
+		<key>lrc</key>
+		<string>big_feet.lrc</string>
+		<key>mp3</key>
+		<string>big_feet.mp3</string>
+		<key>name</key>
+		<string>Big Feet</string>
+		<key>singer</key>
+		<string>Unknown</string>
+		<key>album</key>
+		<string>OxfordReading</string>
+		<key>type</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>go_away_floppy@2x.png</string>
+		<key>lrc</key>
+		<string>go_away_floppy.lrc</string>
+		<key>mp3</key>
+		<string>go_away_floppy.mp3</string>
+		<key>name</key>
+		<string>Go Away Floppy</string>
+		<key>singer</key>
+		<string>Unknown</string>
+		<key>album</key>
+		<string>OxfordReading</string>
+		<key>type</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>hide_and_seek@2x.png</string>
+		<key>lrc</key>
+		<string>hide_and_seek.lrc</string>
+		<key>mp3</key>
+		<string>hide_and_seek.mp3</string>
+		<key>name</key>
+		<string>Hide And Seek</string>
+		<key>singer</key>
+		<string>Unknown</string>
+		<key>album</key>
+		<string>OxfordReading</string>
+		<key>type</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>kipper&apos;s_diary@2x.png</string>
+		<key>lrc</key>
+		<string>kipper&apos;s_diary.lrc</string>
+		<key>mp3</key>
+		<string>kipper&apos;s_diary.mp3</string>
+		<key>name</key>
+		<string>Kipper&apos;s Diary</string>
+		<key>singer</key>
+		<string>Unknown</string>
+		<key>album</key>
+		<string>OxfordReading</string>
+		<key>type</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>Look_at_me@2x.png</string>
+		<key>lrc</key>
+		<string>Look_at_me.lrc</string>
+		<key>mp3</key>
+		<string>Look_at_me.mp3</string>
+		<key>name</key>
+		<string>Look At Me</string>
+		<key>singer</key>
+		<string>Unknown</string>
+		<key>album</key>
+		<string>OxfordReading</string>
+		<key>type</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>reds_and_blues@2x.png</string>
+		<key>lrc</key>
+		<string>reds_and_blues.lrc</string>
+		<key>mp3</key>
+		<string>reds_and_blues.mp3</string>
+		<key>name</key>
+		<string>Reds And Blues</string>
+		<key>singer</key>
+		<string>Unknown</string>
+		<key>album</key>
+		<string>OxfordReading</string>
+		<key>type</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>getting_up@2x.png</string>
+		<key>lrc</key>
+		<string>getting_up.lrc</string>
+		<key>mp3</key>
+		<string>getting_up.mp3</string>
+		<key>name</key>
+		<string>Getting Up</string>
+		<key>singer</key>
+		<string>Unknown</string>
+		<key>album</key>
+		<string>OxfordReading</string>
+		<key>type</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>look_out@2x.png</string>
+		<key>lrc</key>
+		<string>look_out.lrc</string>
+		<key>mp3</key>
+		<string>look_out.mp3</string>
+		<key>name</key>
+		<string>Look Out</string>
+		<key>singer</key>
+		<string>Unknown</string>
+		<key>album</key>
+		<string>OxfordReading</string>
+		<key>type</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>the_street_fair@2x.png</string>
+		<key>lrc</key>
+		<string>the_street_fair.lrc</string>
+		<key>mp3</key>
+		<string>the_street_fair.mp3</string>
+		<key>name</key>
+		<string>The Street Fair</string>
+		<key>singer</key>
+		<string>Unknown</string>
+		<key>album</key>
+		<string>OxfordReading</string>
+		<key>type</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>who_is_it@2x.png</string>
+		<key>lrc</key>
+		<string>who_is_it.lrc</string>
+		<key>mp3</key>
+		<string>who_is_it.mp3</string>
+		<key>name</key>
+		<string>Who Is It</string>
+		<key>singer</key>
+		<string>Unknown</string>
+		<key>album</key>
+		<string>OxfordReading</string>
+		<key>type</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>floppy_floppy@2x.png</string>
+		<key>lrc</key>
+		<string>floppy_floppy.lrc</string>
+		<key>mp3</key>
+		<string>floppy_floppy.mp3</string>
+		<key>name</key>
+		<string>Floppy Floppy</string>
+		<key>singer</key>
+		<string>Unknown</string>
+		<key>album</key>
+		<string>OxfordReading</string>
+		<key>type</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>six_in_a_bed@2x.png</string>
+		<key>lrc</key>
+		<string>six_in_a_bed.lrc</string>
+		<key>mp3</key>
+		<string>six_in_a_bed.mp3</string>
+		<key>name</key>
+		<string>Six In A Bed</string>
+		<key>singer</key>
+		<string>Unknown</string>
+		<key>album</key>
+		<string>OxfordReading</string>
+		<key>type</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>a_good_trick@2x.png</string>
+		<key>lrc</key>
+		<string>a_good_trick.lrc</string>
+		<key>mp3</key>
+		<string>a_good_trick.mp3</string>
+		<key>name</key>
+		<string>A Good Trick</string>
+		<key>singer</key>
+		<string>Unknown</string>
+		<key>album</key>
+		<string>OxfordReading</string>
+		<key>type</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>fun_at_the_beach@2x.png</string>
+		<key>lrc</key>
+		<string>fun_at_the_beach.lrc</string>
+		<key>mp3</key>
+		<string>fun_at_the_beach.mp3</string>
+		<key>name</key>
+		<string>Fun At The Beach</string>
+		<key>singer</key>
+		<string>Unknown</string>
+		<key>album</key>
+		<string>OxfordReading</string>
+		<key>type</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>01 Fetch@2x.png</string>
+		<key>lrc</key>
+		<string>01 Fetch.lrc</string>
+		<key>mp3</key>
+		<string>01 Fetch.mp3</string>
+		<key>name</key>
+		<string>Fetch</string>
+		<key>singer</key>
+		<string>Unknown</string>
+		<key>album</key>
+		<string>OxfordReading</string>
+		<key>type</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>The Big Box@2x.png</string>
+		<key>lrc</key>
+		<string>The Big Box.lrc</string>
+		<key>mp3</key>
+		<string>The Big Box.mp3</string>
+		<key>name</key>
+		<string>The Big Box</string>
+		<key>singer</key>
+		<string>Unknown</string>
+		<key>album</key>
+		<string>OxfordReading</string>
+		<key>type</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>The Hedgehog@2x.png</string>
+		<key>lrc</key>
+		<string>The Hedgehog.lrc</string>
+		<key>mp3</key>
+		<string>The Hedgehog.mp3</string>
+		<key>name</key>
+		<string>The Hedgehog</string>
+		<key>singer</key>
+		<string>Unknown</string>
+		<key>album</key>
+		<string>OxfordReading</string>
+		<key>type</key>
+		<integer>2</integer>
+	</dict>
 </array>
 </plist>

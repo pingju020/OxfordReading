@@ -18,6 +18,9 @@
 //#import "AudioBookPlayerManager.h"
 #import "AudioPlayerManager.h"
 
+#import <MediaPlayer/MPMediaItem.h>
+#import <MediaPlayer/MPNowPlayingInfoCenter.h>
+
 @interface PlayerViewController ()<UILyricViewDelegate>
 //当前曲目索引
 @property (nonatomic,assign) NSInteger currentIndex;
@@ -454,6 +457,28 @@
     if (_modelArray != modelArray) {
         _modelArray = modelArray;
     }
+}
+
+- (void)configNowPlayingCenter:(NSString*)name totalTime:(NSInteger)total currTiem:(NSInteger)curr {
+    //    NSLog(@"锁屏设置");
+    // BASE_INFO_FUN(@"配置NowPlayingCenter");
+    NSMutableDictionary * info = [NSMutableDictionary dictionary];
+    //音乐的标题
+    [info setObject:name forKey:MPMediaItemPropertyTitle];
+    //音乐的艺术家
+    NSString *author= @"QiaoQiao";
+    [info setObject:author forKey:MPMediaItemPropertyArtist];
+    //音乐的播放时间
+    [info setObject:[NSNumber numberWithInteger:curr] forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
+    //音乐的播放速度
+    [info setObject:@(1) forKey:MPNowPlayingInfoPropertyPlaybackRate];
+    //音乐的总时间
+    [info setObject:[NSNumber numberWithInteger:total] forKey:MPMediaItemPropertyPlaybackDuration];
+    //音乐的封面
+    MPMediaItemArtwork * artwork = [[MPMediaItemArtwork alloc] initWithImage:[UIImage imageNamed:@"play_icon_default.png"]];
+    [info setObject:artwork forKey:MPMediaItemPropertyArtwork];
+    //完成设置
+    [[MPNowPlayingInfoCenter defaultCenter]setNowPlayingInfo:info];
 }
 
 @end

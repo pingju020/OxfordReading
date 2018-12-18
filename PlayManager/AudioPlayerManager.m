@@ -38,8 +38,11 @@
 
 -(void)changePlayItem:(NSString*)itemPath{
     if (![_filePath isEqualToString:itemPath]) {
-        _filePath = itemPath;
+        if (self.hasObserver) {
+            [self removeObserver];
+        }
         
+        _filePath = itemPath;
         NSURL* url=nil;
         if ([itemPath hasPrefix:@"http://"] || [itemPath hasPrefix:@"https://"]) {
             url = [NSURL URLWithString:itemPath];
@@ -145,10 +148,6 @@
 
 //添加监听
 - (void)addObserver{
-    
-    if (self.hasObserver) {
-        [self removeObserver];
-    }
     
     self.hasObserver = YES;
     
