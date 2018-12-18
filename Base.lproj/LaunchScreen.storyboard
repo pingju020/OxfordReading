@@ -30,8 +30,8 @@
                                     <constraint firstAttribute="width" secondItem="C23-Jv-eBY" secondAttribute="height" multiplier="14:15" id="3mo-Jk-S1O"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="琢磨琢磨英语" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7es-NL-fhd">
-                                <rect key="frame" x="55" y="470" width="265" height="63"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="琢磨英语" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7es-NL-fhd">
+                                <rect key="frame" x="99" y="470" width="177" height="63"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="63" id="rx2-z1-p6n"/>
                                 </constraints>

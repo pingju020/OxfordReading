@@ -28,7 +28,7 @@
 @implementation MainHomeViewController
 
 - (void)viewDidLoad {
-    self.title = @"琢磨琢磨英语";
+    self.title = @"琢磨英语";
     [super viewDidLoad];
     
     [self getPlayList];

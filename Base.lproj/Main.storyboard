@@ -13,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -108,11 +108,49 @@
                                                         </constraints>
                                                         <state key="normal" image="eye"/>
                                                     </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jl-g5-mAA">
+                                                        <rect key="frame" x="15" y="235" width="38" height="38"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="38" id="Gct-p0-3SK"/>
+                                                            <constraint firstAttribute="width" constant="38" id="lLx-1n-odB"/>
+                                                        </constraints>
+                                                        <state key="normal" image="login_unchecked.png"/>
+                                                        <state key="selected" image="login_checked.png"/>
+                                                        <connections>
+                                                            <action selector="checkAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hYk-xh-CE8"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4HD-TS-uck">
+                                                        <rect key="frame" x="58" y="240.5" width="153" height="27"/>
+                                                        <state key="normal">
+                                                            <attributedString key="attributedTitle">
+                                                                <fragment content="同意">
+                                                                    <attributes>
+                                                                        <color key="NSColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <font key="NSFont" size="15" name=".PingFangSC-Regular"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                                <fragment content="《隐私授权协议》">
+                                                                    <attributes>
+                                                                        <color key="NSColor" red="0.52594959735870361" green="0.67566782236099243" blue="0.28164792060852051" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <font key="NSFont" size="15" name=".PingFangSC-Regular"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                            </attributedString>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="showInfoAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dep-WU-mXo"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="Z04-0y-KPx" firstAttribute="leading" secondItem="Ku7-nJ-8d5" secondAttribute="leading" id="1CD-XT-lW2"/>
                                                     <constraint firstItem="f09-ki-krj" firstAttribute="leading" secondItem="qtj-Qd-V1L" secondAttribute="leading" constant="15" id="20j-pF-CXi"/>
+                                                    <constraint firstItem="4HD-TS-uck" firstAttribute="leading" secondItem="6jl-g5-mAA" secondAttribute="trailing" constant="5" id="2zI-wD-Anl"/>
+                                                    <constraint firstItem="6jl-g5-mAA" firstAttribute="top" secondItem="tww-io-Jaq" secondAttribute="bottom" constant="5" id="4La-rq-9SH"/>
                                                     <constraint firstItem="Ku7-nJ-8d5" firstAttribute="leading" secondItem="qtj-Qd-V1L" secondAttribute="leading" constant="18" id="4nZ-AU-B2i"/>
                                                     <constraint firstItem="MS1-Rg-m8q" firstAttribute="leading" secondItem="f09-ki-krj" secondAttribute="trailing" constant="10" id="7qN-aQ-AAm"/>
                                                     <constraint firstItem="AHB-Pi-eo1" firstAttribute="leading" secondItem="gkF-sA-rrV" secondAttribute="trailing" constant="21" id="8jd-s3-qOI"/>
@@ -124,9 +162,11 @@
                                                     <constraint firstAttribute="trailing" secondItem="TiD-1o-7iV" secondAttribute="trailing" constant="1" id="KIm-TI-12f"/>
                                                     <constraint firstAttribute="trailing" secondItem="MS1-Rg-m8q" secondAttribute="trailing" constant="15" id="KOU-F2-fl2"/>
                                                     <constraint firstAttribute="trailing" secondItem="Z04-0y-KPx" secondAttribute="trailing" constant="15" id="Ks8-2B-PKp"/>
+                                                    <constraint firstItem="6jl-g5-mAA" firstAttribute="leading" secondItem="tww-io-Jaq" secondAttribute="leading" id="MY3-aU-nsG"/>
                                                     <constraint firstItem="EFZ-fj-4h3" firstAttribute="leading" secondItem="Ku7-nJ-8d5" secondAttribute="trailing" constant="21" id="Mha-aN-k2b"/>
                                                     <constraint firstAttribute="trailing" secondItem="6dc-I1-ETj" secondAttribute="trailing" constant="15" id="Q9v-qe-m5S"/>
                                                     <constraint firstItem="6dc-I1-ETj" firstAttribute="leading" secondItem="gkF-sA-rrV" secondAttribute="leading" id="XQR-cp-RcG"/>
+                                                    <constraint firstItem="4HD-TS-uck" firstAttribute="centerY" secondItem="6jl-g5-mAA" secondAttribute="centerY" id="YpP-iU-y5U"/>
                                                     <constraint firstItem="Ku7-nJ-8d5" firstAttribute="top" secondItem="gkF-sA-rrV" secondAttribute="bottom" constant="34" id="Z8t-6J-DKe"/>
                                                     <constraint firstItem="tww-io-Jaq" firstAttribute="top" secondItem="Z04-0y-KPx" secondAttribute="bottom" constant="39" id="eiI-Pa-eaT"/>
                                                     <constraint firstItem="gkF-sA-rrV" firstAttribute="top" secondItem="qtj-Qd-V1L" secondAttribute="top" constant="17" id="fmE-PO-zQG"/>
@@ -174,15 +214,19 @@
                     </view>
                     <connections>
                         <outlet property="account" destination="AHB-Pi-eo1" id="ZOV-tc-6zR"/>
+                        <outlet property="check" destination="6jl-g5-mAA" id="sXE-NR-eJq"/>
                         <outlet property="password" destination="EFZ-fj-4h3" id="DJa-PK-MOh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="140" y="104.7976011994003"/>
         </scene>
     </scenes>
     <resources>
         <image name="eye" width="42" height="20"/>
+        <image name="login_checked.png" width="19" height="19"/>
+        <image name="login_unchecked.png" width="19" height="19"/>
         <image name="logo" width="21.600000381469727" height="21.600000381469727"/>
         <image name="password" width="42" height="54"/>
         <image name="user" width="48" height="53"/>

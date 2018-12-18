@@ -144,10 +144,12 @@
         
         //更新歌词
         [self updateLyric];
+        [self configNowPlayingCenter:self.modelArray[self.currentIndex].name image:self.modelArray[self.currentIndex].image totalTime:totalTime currTiem:currentTime];
     };
     
     [AudioPlayerManager sharedManager].playFinished = ^{
-        self.playButton.selected = NO;
+        //self.playButton.selected = NO;
+        [[AudioPlayerManager sharedManager] play];
     };
 }
 
@@ -459,14 +461,14 @@
     }
 }
 
-- (void)configNowPlayingCenter:(NSString*)name totalTime:(NSInteger)total currTiem:(NSInteger)curr {
+- (void)configNowPlayingCenter:(NSString*)name image:(NSString*)image totalTime:(NSInteger)total currTiem:(NSInteger)curr {
     //    NSLog(@"锁屏设置");
     // BASE_INFO_FUN(@"配置NowPlayingCenter");
     NSMutableDictionary * info = [NSMutableDictionary dictionary];
     //音乐的标题
     [info setObject:name forKey:MPMediaItemPropertyTitle];
     //音乐的艺术家
-    NSString *author= @"QiaoQiao";
+    NSString *author= @"琢磨英语";
     [info setObject:author forKey:MPMediaItemPropertyArtist];
     //音乐的播放时间
     [info setObject:[NSNumber numberWithInteger:curr] forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
@@ -475,7 +477,7 @@
     //音乐的总时间
     [info setObject:[NSNumber numberWithInteger:total] forKey:MPMediaItemPropertyPlaybackDuration];
     //音乐的封面
-    MPMediaItemArtwork * artwork = [[MPMediaItemArtwork alloc] initWithImage:[UIImage imageNamed:@"play_icon_default.png"]];
+    MPMediaItemArtwork * artwork = [[MPMediaItemArtwork alloc] initWithImage:[UIImage imageNamed:image]];
     [info setObject:artwork forKey:MPMediaItemPropertyArtwork];
     //完成设置
     [[MPNowPlayingInfoCenter defaultCenter]setNowPlayingInfo:info];
